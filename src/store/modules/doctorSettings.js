@@ -29,7 +29,7 @@ export default {
     async GET_DOCTORS_AJAX(){
       const formData = new FormData();
       formData.append("action", 'doctors/get');
-      formData.append("key", '8cbd6a0c2e767862b02887a446bb34ca');
+      formData.append("cors_key", '8cbd6a0c2e767862b02887a446bb34ca');
       formData.append("fields", 'id, fullname');
       axios
           .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', formData)
@@ -43,7 +43,7 @@ export default {
     async GET_DOCTOR_SETTINGS_AJAX({getters}){
       const formData = new FormData();
       formData.append("action", 'doctors/get');
-      formData.append("key", '8cbd6a0c2e767862b02887a446bb34ca');
+      formData.append("cors_key", '8cbd6a0c2e767862b02887a446bb34ca');
      // formData.append("fields", 'id, fullname');
       formData.append("id", getters.currentDoctorId);
 
@@ -130,4 +130,3 @@ export default {
 
 
 }
-  

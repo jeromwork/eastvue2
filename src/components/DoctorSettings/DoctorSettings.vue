@@ -50,8 +50,6 @@
                 <v-text-field
                         class="pa-2"
                         v-model="doctorSettings.doc__surname"
-                        :counter="10"
-                        :rules="nameRules"
                         label="Фамилия"
                         required
                 ></v-text-field>
@@ -82,7 +80,7 @@
         <v-row no-gutters >
             <v-col cols="12"
                    sm="12"
-                   md="4">
+                   md="12">
 
                 <v-combobox
                         hide-selected
