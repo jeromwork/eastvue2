@@ -10,7 +10,6 @@
                 <v-card-text>
                     <v-form
                             ref="form"
-                            v-model="valid"
                             lazy-validation
                     >
                         <v-row no-gutters >
@@ -56,8 +55,8 @@
 
 
             </v-col>
-            <v-col cols="6"
-                   sm="6"
+            <v-col cols="12"
+                   sm="12"
                    md="4">
                 <v-text-field
                         class="pa-2"
@@ -65,8 +64,8 @@
                         label="Имя"
                 ></v-text-field>
             </v-col>
-            <v-col cols="6"
-                   sm="6"
+            <v-col cols="12"
+                   sm="12"
                    md="4">
                 <v-text-field
                         class="pa-2"
@@ -82,86 +81,151 @@
                    sm="12"
                    md="12">
 
-                <v-combobox
-                        hide-selected
-                        multiple
-                        outlined
-                        small-chips
-                        v-model="select"
-                        :items="items"
-                        :deletable-chips="true"
-                ></v-combobox>
+                <v-switch
+                        v-model="doctorSettings.doc__off"
+                        :label="'Доктор отключен'"
+                        :false-value="`0`"
+                        :true-value="`1`"
+                        :disabled="!doctorSettings.doc__off"
+                >
 
-
-
+                </v-switch>
             </v-col>
-            <v-col cols="6"
-                   sm="6"
+            <v-col cols="12"
+                   sm="12"
                    md="4">
-                <v-text-field
-                        class="pa-2"
-                        v-model="name"
-                        :counter="10"
-                        :rules="nameRules"
-                        label="Name"
-                        required
-                ></v-text-field>
+                <v-switch
+                        v-model="doctorSettings.doc__holiday"
+                        :label="'Доктор в отпуске'"
+                        :false-value="`0`"
+                        :true-value="`1`"
+                        :disabled="!doctorSettings.doc__holiday"
+                >
+
+                </v-switch>
             </v-col>
-            <v-col cols="6"
-                   sm="6"
+            <v-col cols="12"
+                   sm="12"
                    md="4">
-                <v-text-field
-                        class="pa-2"
-                        v-model="name"
-                        :counter="10"
-                        :rules="nameRules"
-                        label="Name"
-                        required
-                ></v-text-field>
+                <v-switch
+                        v-model="doctorSettings.doc__show_experience"
+                        :label="'Показывать опыт'"
+                        :false-value="`0`"
+                        :true-value="`1`"
+                        :disabled="!doctorSettings.doc__show_experience"
+
+                >
+
+                </v-switch>
             </v-col>
 
         </v-row>
 
-        <v-select
+        <v-row no-gutters >
+            <v-col cols="12"
+                   sm="12"
+                   md="4">
+
+                <v-switch
+                        v-model="doctorSettings.doc__pregnant"
+                        :label="'Работает с беременными'"
+                        :false-value="`0`"
+                        :true-value="`1`"
+                        :disabled="!doctorSettings.doc__pregnant"
+                >
+
+                </v-switch>
+            </v-col>
+            <v-col cols="12"
+                   sm="12"
+                   md="4">
+                <v-switch
+                        v-model="doctorSettings.doc__telemedicine"
+
+                        :label="'Телемедицина'"
+                        :false-value="`0`"
+                        :true-value="`1`"
+                        :disabled="!doctorSettings.doc__telemedicine"
+                >
+
+                </v-switch>
+            </v-col>
+            <v-col cols="12"
+                   sm="12"
+                   md="4">
+                <v-switch
+                        v-model="doctorSettings.doc__show_comments"
+                        :label="'Показывать комментарии'"
+                        :false-value="`0`"
+                        :true-value="`1`"
+                        :disabled="!doctorSettings.doc__show_comments"
+
+                >
+
+                </v-switch>
+            </v-col>
+
+        </v-row>
+
+
+        <v-row no-gutters >
+            <v-col cols="12"
+                   sm="12"
+                   md="6">
+
+                <v-select
+                        class="pa-2"
+                        v-model="doctorSettings.doc__child"
+                        :items="listChildAges"
+                        label="С какого возраста работает с детьми"
+                        :disabled="!doctorSettings.doc__child"
+
+                        :outlined="true"
+                ></v-select>
+            </v-col>
+            <v-col cols="12"
+                   sm="12"
+                   md="6">
+                <v-text-field
+                        class="pa-2"
+                        type="number"
+                        v-model="doctorSettings.doc__experience"
+                        label="Опыт работы(год начала работы)"
+                        :outlined="true"
+                ></v-text-field>
+            </v-col>
+
+
+
+        </v-row>
+
+
+
+
+        <v-combobox
+                hide-selected
+                multiple
+                outlined
+                small-chips
                 v-model="select"
                 :items="items"
-                :rules="[v => !!v || 'Item is required']"
-                label="Item"
-                required
-        ></v-select>
+                :deletable-chips="true"
+        ></v-combobox>
 
-        <v-checkbox
-                v-model="checkbox"
-                :rules="[v => !!v || 'You must agree to continue!']"
-                label="Do you agree?"
-                required
-        ></v-checkbox>
+
 
 
 
         <v-btn
-                :disabled="!valid"
+                :disabled="!doctorSettings.doc__name"
                 color="success"
                 class="mr-4"
-                @click="validate"
+                @click="onSaveDoctorData"
         >
-            Validate
+            Сохранить
         </v-btn>
 
-        <v-btn
-                color="error"
-                class="mr-4"
-                @click="reset"
-        >
-            Reset Form
-        </v-btn>
 
-        <v-btn
-                color="warning"
-                @click="resetValidation"
-        >
-            Reset Validation
-        </v-btn>
         </v-form>
         </v-card-text>
     </v-card>
@@ -187,6 +251,7 @@
 
         },
         data: () => ({
+            valid2: true,
             valid: true,
             name: '',
             nameRules: [
@@ -232,6 +297,7 @@
         computed:{
             //====================================================================
             ...mapGetters({getDoctors:'doctorSettings/getDoctors'
+                ,getChildAges:'doctorSettings/getArrChildAges'
                 //,currentDoctorId:'doctorSettings/currentDoctorId'
             }),
 
@@ -266,7 +332,8 @@
                     //this.$store.dispatch('doctorSettings/GET_DOCTOR_SETTINGS_AJAX');
                 },
             },
-            listDoctors(){                return this.getDoctors;                }
+            listDoctors(){                return this.getDoctors;                },
+            listChildAges(){                return this.getChildAges;                }
 
         }
 
