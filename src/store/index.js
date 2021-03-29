@@ -6,6 +6,7 @@ import doctorSettings from './modules/doctorSettings'
 Vue.use(Vuex)
 
 
+
 export default new Vuex.Store({
   modules: {
       doctorSettings,

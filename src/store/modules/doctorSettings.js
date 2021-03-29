@@ -29,7 +29,7 @@ export default {
     async GET_DOCTORS_AJAX(){
       const formData = new FormData();
       formData.append("action", 'doctors/get');
-      formData.append("key", '8cbd6a0c2e767862b02887a446bb34ca');
+      formData.append("cors_key", '8cbd6a0c2e767862b02887a446bb34ca');
       formData.append("fields", 'id, fullname');
       axios
           .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', formData)
@@ -43,9 +43,10 @@ export default {
     async GET_DOCTOR_SETTINGS_AJAX({getters}){
       const formData = new FormData();
       formData.append("action", 'doctors/get');
-      formData.append("key", '8cbd6a0c2e767862b02887a446bb34ca');
+      formData.append("cors_key", '8cbd6a0c2e767862b02887a446bb34ca');
      // formData.append("fields", 'id, fullname');
       formData.append("id", getters.currentDoctorId);
+
 
       axios
 
@@ -72,7 +73,7 @@ export default {
       }
 
       formData.append("action", 'doctors/set');
-      formData.append("key", '8cbd6a0c2e767862b02887a446bb34ca');
+      formData.append("cors_key", '8cbd6a0c2e767862b02887a446bb34ca');
       formData.append("id", getters.currentDoctorId);
 
       axios
@@ -102,21 +103,28 @@ export default {
     }
   },
   state: {
-    doctorSettings:[
+    doctorSettings:
       {id:0,
         email: 0,
         name: 0,
         gender: 0}
-    ],
+    ,
     doctors:[
       {id:0, name:'Выберите доктора'}
     ],
     currentDoctorId:1,
-
+    arrChildAge:[
+      {value:'-1', text:'Не работает с детьми'},
+        {value:'0', text:'Новорожденный'},
+      {value:'1', text:'с 1го месяца'},
+      {value:'2', text:'с 2х месяцев'},
+    ],
   },
+
 
   getters: {
     getDoctors: state => {        return state.doctors;      },
+    getArrChildAges: state => {        return state.arrChildAge;      },
     //todo разобраться почему currentDoctorId is not a function
     currentDoctorId: state => {        return state.currentDoctorId;      },
     doctorSettings: state => {        return state.doctorSettings ;      },
