@@ -41,6 +41,7 @@
             ref="form"
             v-model="valid"
             lazy-validation
+
     >
         <v-row no-gutters >
             <v-col cols="12"
@@ -199,7 +200,9 @@
 
         </v-row>
 
-
+        <MultiTags
+                typeTag="doctors"
+        ></MultiTags>
 
 
         <v-combobox
@@ -235,7 +238,7 @@
 
 <script>
     import { mapGetters , mapMutations , mapState} from "vuex";
-
+    import MultiTags from '../MultiTags/MultiTags';
     export default {
 
 
@@ -248,6 +251,7 @@
             }
         },
         components: {
+            MultiTags
 
         },
         data: () => ({
@@ -321,6 +325,18 @@
                 },
             },
             doctorSettings:{
+                get(){        //console.log(this);
+                    return this.$store.getters["doctorSettings/doctorSettings"];
+                },
+                set(val){
+
+                    console.log(val);
+                    //this.SET_CURRENT_DOCTOR_ID(val);
+                    //this.$store.commit('doctorSettings/SET_CURRENT_DOCTOR_ID', val);
+                    //this.$store.dispatch('doctorSettings/GET_DOCTOR_SETTINGS_AJAX');
+                },
+            },
+            doctorSettings2:{
                 get(){        //console.log(this);
                     return this.$store.getters["doctorSettings/doctorSettings"];
                 },
