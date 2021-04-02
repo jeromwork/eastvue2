@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 
-import doctorSettings from './modules/doctorSettings'
+import doctorSettings from './modules/doctorSettings/doctorSettings'
 Vue.use(Vuex)
 
 

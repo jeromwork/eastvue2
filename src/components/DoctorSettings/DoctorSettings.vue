@@ -41,7 +41,7 @@
             ref="form"
             v-model="valid"
             lazy-validation
-            :disabled="!doctorSettings.doc__name"
+
     >
         <v-row no-gutters >
             <v-col cols="12"
@@ -82,7 +82,7 @@
         <v-row no-gutters >
             <v-col cols="12"
                    sm="12"
-                   md="4">
+                   md="12">
 
                 <v-switch
                         v-model="doctorSettings.doc__off"
@@ -202,7 +202,9 @@
 
         </v-row>
 
-
+        <MultiTags
+                typeTag="doctors"
+        ></MultiTags>
 
 
         <v-combobox
@@ -210,8 +212,8 @@
                 multiple
                 outlined
                 small-chips
-                v-model="listSelect"
-                :items="listTags"
+                v-model="select"
+                :items="items"
                 :deletable-chips="true"
         ></v-combobox>
 
@@ -238,7 +240,7 @@
 
 <script>
     import { mapGetters , mapMutations , mapState} from "vuex";
-
+    import MultiTags from '../MultiTags/MultiTags';
     export default {
 
 
@@ -251,25 +253,12 @@
             }
         },
         components: {
+            MultiTags
 
         },
         data: () => ({
             valid2: true,
             valid: true,
-
-            listTags: [
-                {value: 1, text:"Тэг 1"}
-                ,{value: 2, text:"Тэг 2"}
-                ,{value: 3, text:"Тэг 3"}
-                ,{value: 4, text:"Тэг 4"}
-                ,{value: 5, text:"Тэг 5"}
-                ,{value: 6, text:"Тэг 6"}
-            ],
-            listSelect:[
-                {value: 3, text:"Тэг 3"}
-                ,{value: 4, text:"Тэг 4"}
-            ],
-
             name: '',
             nameRules: [
                 v => !!v || 'Name is required',
@@ -338,6 +327,18 @@
                 },
             },
             doctorSettings:{
+                get(){        //console.log(this);
+                    return this.$store.getters["doctorSettings/doctorSettings"];
+                },
+                set(val){
+
+                    console.log(val);
+                    //this.SET_CURRENT_DOCTOR_ID(val);
+                    //this.$store.commit('doctorSettings/SET_CURRENT_DOCTOR_ID', val);
+                    //this.$store.dispatch('doctorSettings/GET_DOCTOR_SETTINGS_AJAX');
+                },
+            },
+            doctorSettings2:{
                 get(){        //console.log(this);
                     return this.$store.getters["doctorSettings/doctorSettings"];
                 },
