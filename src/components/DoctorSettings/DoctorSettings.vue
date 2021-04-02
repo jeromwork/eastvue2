@@ -41,6 +41,7 @@
             ref="form"
             v-model="valid"
             lazy-validation
+            :disabled="!doctorSettings.doc__name"
     >
         <v-row no-gutters >
             <v-col cols="12"
@@ -209,8 +210,8 @@
                 multiple
                 outlined
                 small-chips
-                v-model="select"
-                :items="items"
+                v-model="listSelect"
+                :items="listTags"
                 :deletable-chips="true"
         ></v-combobox>
 
@@ -255,6 +256,20 @@
         data: () => ({
             valid2: true,
             valid: true,
+
+            listTags: [
+                {value: 1, text:"Тэг 1"}
+                ,{value: 2, text:"Тэг 2"}
+                ,{value: 3, text:"Тэг 3"}
+                ,{value: 4, text:"Тэг 4"}
+                ,{value: 5, text:"Тэг 5"}
+                ,{value: 6, text:"Тэг 6"}
+            ],
+            listSelect:[
+                {value: 3, text:"Тэг 3"}
+                ,{value: 4, text:"Тэг 4"}
+            ],
+
             name: '',
             nameRules: [
                 v => !!v || 'Name is required',
