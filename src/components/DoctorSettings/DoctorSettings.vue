@@ -29,216 +29,221 @@
             </v-card>
         </v-col>
         <v-col cols="12"
-                   sm="12"
-                   md="12">
-    <v-card
-            elevation="8"
-            outlined
-    >
-        <v-card-text>
+               sm="12"
+               md="12">
+            <v-card
+                    elevation="8"
+                    outlined
+            >
+                <v-card-text>
 
-    <v-form
-            ref="form"
-            v-model="valid"
-            lazy-validation
-            :disabled="!doctorSettings.doc__name"
-    >
-        <v-row no-gutters >
-            <v-col cols="12"
-                   sm="12"
-                   md="4">
-                <v-text-field
-                        class="pa-2"
-                        v-model="doctorSettings.doc__surname"
-                        :counter="10"
-                        :rules="nameRules"
-                        label="Фамилия"
-                        required
-                ></v-text-field>
+                    <v-form
+                            ref="form"
+                            v-model="valid"
+                            lazy-validation
 
-
-            </v-col>
-            <v-col cols="12"
-                   sm="12"
-                   md="4">
-                <v-text-field
-                        class="pa-2"
-                        v-model="doctorSettings.doc__name"
-                        label="Имя"
-                ></v-text-field>
-            </v-col>
-            <v-col cols="12"
-                   sm="12"
-                   md="4">
-                <v-text-field
-                        class="pa-2"
-                        v-model="doctorSettings.doc__middlename"
-                        label="Отчество"
-                ></v-text-field>
-            </v-col>
-
-        </v-row>
-
-        <v-row no-gutters >
-            <v-col cols="12"
-                   sm="12"
-                   md="4">
-
-                <v-switch
-                        v-model="doctorSettings.doc__off"
-                        :label="'Доктор отключен'"
-                        :false-value="`0`"
-                        :true-value="`1`"
-                        :disabled="!doctorSettings.doc__off"
-                >
-
-                </v-switch>
-            </v-col>
-            <v-col cols="12"
-                   sm="12"
-                   md="4">
-                <v-switch
-                        v-model="doctorSettings.doc__holiday"
-                        :label="'Доктор в отпуске'"
-                        :false-value="`0`"
-                        :true-value="`1`"
-                        :disabled="!doctorSettings.doc__holiday"
-                >
-
-                </v-switch>
-            </v-col>
-            <v-col cols="12"
-                   sm="12"
-                   md="4">
-                <v-switch
-                        v-model="doctorSettings.doc__show_experience"
-                        :label="'Показывать опыт'"
-                        :false-value="`0`"
-                        :true-value="`1`"
-                        :disabled="!doctorSettings.doc__show_experience"
-
-                >
-
-                </v-switch>
-            </v-col>
-
-        </v-row>
-
-        <v-row no-gutters >
-            <v-col cols="12"
-                   sm="12"
-                   md="4">
-
-                <v-switch
-                        v-model="doctorSettings.doc__pregnant"
-                        :label="'Работает с беременными'"
-                        :false-value="`0`"
-                        :true-value="`1`"
-                        :disabled="!doctorSettings.doc__pregnant"
-                >
-
-                </v-switch>
-            </v-col>
-            <v-col cols="12"
-                   sm="12"
-                   md="4">
-                <v-switch
-                        v-model="doctorSettings.doc__telemedicine"
-
-                        :label="'Телемедицина'"
-                        :false-value="`0`"
-                        :true-value="`1`"
-                        :disabled="!doctorSettings.doc__telemedicine"
-                >
-
-                </v-switch>
-            </v-col>
-            <v-col cols="12"
-                   sm="12"
-                   md="4">
-                <v-switch
-                        v-model="doctorSettings.doc__show_comments"
-                        :label="'Показывать комментарии'"
-                        :false-value="`0`"
-                        :true-value="`1`"
-                        :disabled="!doctorSettings.doc__show_comments"
-
-                >
-
-                </v-switch>
-            </v-col>
-
-        </v-row>
+                    >
+                        <v-row no-gutters >
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="4">
+                                <v-text-field
+                                        class="pa-2"
+                                        v-model="doctorSettings.doc__surname"
+                                        :counter="10"
+                                        :rules="nameRules"
+                                        label="Фамилия"
+                                        required
+                                ></v-text-field>
 
 
-        <v-row no-gutters >
-            <v-col cols="12"
-                   sm="12"
-                   md="6">
+                            </v-col>
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="4">
+                                <v-text-field
+                                        class="pa-2"
+                                        v-model="doctorSettings.doc__name"
+                                        label="Имя"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="4">
+                                <v-text-field
+                                        class="pa-2"
+                                        v-model="doctorSettings.doc__middlename"
+                                        label="Отчество"
+                                ></v-text-field>
+                            </v-col>
 
-                <v-select
-                        class="pa-2"
-                        v-model="doctorSettings.doc__child"
-                        :items="listChildAges"
-                        label="С какого возраста работает с детьми"
-                        :disabled="!doctorSettings.doc__child"
+                        </v-row>
 
-                        :outlined="true"
-                ></v-select>
-            </v-col>
-            <v-col cols="12"
-                   sm="12"
-                   md="6">
-                <v-text-field
-                        class="pa-2"
-                        type="number"
-                        v-model="doctorSettings.doc__experience"
-                        label="Опыт работы(год начала работы)"
-                        :outlined="true"
-                ></v-text-field>
-            </v-col>
+                        <v-row no-gutters >
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="4">
+
+                                <v-switch
+                                        v-model="doctorSettings.doc__off"
+                                        :label="'Доктор отключен'"
+                                        :false-value="`0`"
+                                        :true-value="`1`"
+                                        :disabled="!doctorSettings.doc__off"
+                                >
+
+                                </v-switch>
+                            </v-col>
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="4">
+                                <v-switch
+                                        v-model="doctorSettings.doc__holiday"
+                                        :label="'Доктор в отпуске'"
+                                        :false-value="`0`"
+                                        :true-value="`1`"
+                                        :disabled="!doctorSettings.doc__holiday"
+                                >
+
+                                </v-switch>
+                            </v-col>
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="4">
+                                <v-switch
+                                        v-model="doctorSettings.doc__show_experience"
+                                        :label="'Показывать опыт'"
+                                        :false-value="`0`"
+                                        :true-value="`1`"
+                                        :disabled="!doctorSettings.doc__show_experience"
+
+                                >
+
+                                </v-switch>
+                            </v-col>
+
+                        </v-row>
+
+                        <v-row no-gutters >
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="4">
+
+                                <v-switch
+                                        v-model="doctorSettings.doc__pregnant"
+                                        :label="'Работает с беременными'"
+                                        :false-value="`0`"
+                                        :true-value="`1`"
+                                        :disabled="!doctorSettings.doc__pregnant"
+                                >
+
+                                </v-switch>
+                            </v-col>
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="4">
+                                <v-switch
+                                        v-model="doctorSettings.doc__telemedicine"
+
+                                        :label="'Телемедицина'"
+                                        :false-value="`0`"
+                                        :true-value="`1`"
+                                        :disabled="!doctorSettings.doc__telemedicine"
+                                >
+
+                                </v-switch>
+                            </v-col>
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="4">
+                                <v-switch
+                                        v-model="doctorSettings.doc__show_comments"
+                                        :label="'Показывать комментарии'"
+                                        :false-value="`0`"
+                                        :true-value="`1`"
+                                        :disabled="!doctorSettings.doc__show_comments"
+
+                                >
+
+                                </v-switch>
+                            </v-col>
+
+                        </v-row>
 
 
+                        <v-row no-gutters >
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="6">
 
-        </v-row>
+                                <v-select
+                                        class="pa-2"
+                                        v-model="doctorSettings.doc__child"
+                                        :items="listChildAges"
+                                        label="С какого возраста работает с детьми"
+                                        :disabled="!doctorSettings.doc__child"
+
+                                        :outlined="true"
+                                ></v-select>
+                            </v-col>
+                            <v-col cols="12"
+                                   sm="12"
+                                   md="6">
+                                <v-text-field
+                                        class="pa-2"
+                                        type="number"
+                                        v-model="doctorSettings.doc__experience"
+                                        label="Опыт работы(год начала работы)"
+                                        :outlined="true"
+                                ></v-text-field>
+                            </v-col>
 
 
 
+                        </v-row>
 
-        <v-combobox
-                hide-selected
-                multiple
-                outlined
-                small-chips
-                v-model="listSelect"
-                :items="listTags"
-                :deletable-chips="true"
-        ></v-combobox>
+                        <MultiTags
+                                typeTag="doctors"
+                                placeholder="Выберите докторов"
+                                @custom="SET_TAGS($event, 'doctors')"
+                        ></MultiTags>
 
 
+                        <v-combobox
+                                hide-selected
+                                multiple
+                                outlined
+                                small-chips
+                                v-model="select"
+                                :items="items"
+                                :deletable-chips="true"
+
+                        ></v-combobox>
 
 
 
-        <v-btn
-                :disabled="!doctorSettings.doc__name"
-                color="success"
-                class="mr-4"
-                @click="onSaveDoctorData"
-        >
-            Сохранить
-        </v-btn>
 
 
-        </v-form>
-        </v-card-text>
-    </v-card>
+                        <v-btn
+                                :disabled="!doctorSettings.doc__name"
+                                color="success"
+                                class="mr-4"
+                                @click="onSaveDoctorData"
+                        >
+                            Сохранить
+                        </v-btn>
+
+
+                    </v-form>
+                </v-card-text>
+            </v-card>
         </v-col>
     </v-row>
 </template>
 
 <script>
     import { mapGetters , mapMutations , mapState} from "vuex";
-
+    import MultiTags from '../MultiTags/MultiTags';
     export default {
 
 
@@ -251,25 +256,12 @@
             }
         },
         components: {
+            MultiTags
 
         },
         data: () => ({
             valid2: true,
             valid: true,
-
-            listTags: [
-                {value: 1, text:"Тэг 1"}
-                ,{value: 2, text:"Тэг 2"}
-                ,{value: 3, text:"Тэг 3"}
-                ,{value: 4, text:"Тэг 4"}
-                ,{value: 5, text:"Тэг 5"}
-                ,{value: 6, text:"Тэг 6"}
-            ],
-            listSelect:[
-                {value: 3, text:"Тэг 3"}
-                ,{value: 4, text:"Тэг 4"}
-            ],
-
             name: '',
             nameRules: [
                 v => !!v || 'Name is required',
@@ -297,8 +289,10 @@
             reset () {
                 this.$refs.form.reset()
             },
-            resetValidation () {
-                this.$refs.form.resetValidation()
+            SET_TAGS (e, name) {
+                console.log(e);
+                this.$store.commit('doctorSettings/SET_DOCTOR_TAGS', {name:name, data:e});
+               // this.$refs.form.resetValidation()
             },
             onSaveDoctorData(){
                 //console.log(this.$refs.form);//забываем jquery. Здесь не нужно брать данные формы. Они храняться в data
@@ -338,6 +332,18 @@
                 },
             },
             doctorSettings:{
+                get(){        //console.log(this);
+                    return this.$store.getters["doctorSettings/doctorSettings"];
+                },
+                set(val){
+
+                    console.log(val);
+                    //this.SET_CURRENT_DOCTOR_ID(val);
+                    //this.$store.commit('doctorSettings/SET_CURRENT_DOCTOR_ID', val);
+                    //this.$store.dispatch('doctorSettings/GET_DOCTOR_SETTINGS_AJAX');
+                },
+            },
+            doctorSettings2:{
                 get(){        //console.log(this);
                     return this.$store.getters["doctorSettings/doctorSettings"];
                 },

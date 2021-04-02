@@ -10,6 +10,15 @@ export default {
       //console.log(state);
     },
     FILL_DOCTOR_SETTINGS_DATA(state, doctor) {        state.doctorSettings = doctor.data[0];    },
+    SET_DOCTOR_TAGS(state, tags ={}) {
+
+      if(!state.doctorSettings.bind){
+        console.log('обновляем bind');
+        state.doctorSettings.bind = {};
+      }
+      state.doctorSettings.bind[tags.name] = tags.data ;
+      console.log(state);
+    },
     SET_LIST_DOCTORS(state, doctors) {
 
       if(!Array.isArray(doctors)){console.log('необходимо передать массив');}
@@ -57,31 +66,18 @@ export default {
             this.commit('doctorSettings/FILL_DOCTOR_SETTINGS_DATA', response.data);
           });
     },
-    async SAVE_DOCTOR_SETTINGS_AJAX({getters}){
+    async SAVE_DOCTOR_SETTINGS_AJAX({getters, state}){
 
-
-      const formData = new FormData();
-
-
-
-
-      for (let key in getters.doctorSettings) {
-        formData.append(key, getters.doctorSettings[key]);
-        console.log(getters.doctorSettings[key]);
-
-
-      }
-
-      formData.append("action", 'doctors/set');
-      formData.append("cors_key", '8cbd6a0c2e767862b02887a446bb34ca');
-      formData.append("id", getters.currentDoctorId);
-
+      let qdata = {
+        ...state.doctorSettings,
+        action:'doctors/set',
+        cors_key:'8cbd6a0c2e767862b02887a446bb34ca',
+        id:getters.currentDoctorId};
       axios
 
-          .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', formData)
+          .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
           .then(response => {this.info = response
 
-            console.log(response);
             //this.commit('doctorSettings/FILL_DOCTOR_SETTINGS_DATA', response.data);
           });
     },
