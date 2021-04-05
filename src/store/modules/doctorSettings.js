@@ -67,7 +67,7 @@ export default {
           });
     },
     async SAVE_DOCTOR_SETTINGS_AJAX({getters, state}){
-
+console.log(state);
       let qdata = {
         ...state.doctorSettings,
         action:'doctors/set',
@@ -134,4 +134,3 @@ export default {
 
 
 }
-  

@@ -40,6 +40,9 @@
             placeholder:{
                 type: String,
             },
+            include_fields:{
+                type: Object,
+            },
 
         },
 
@@ -69,7 +72,7 @@
                 console.log('search');
                 if(!val) {return;}
                 const formData = new FormData();
-                formData.append("action", 'doctors/get');
+                formData.append("action", this.typeTag + '/get');
                 formData.append("cors_key", '8cbd6a0c2e767862b02887a446bb34ca');
                 formData.append("include_fields", JSON.stringify({'id':'value', 'fullname':'text'}));
                 if(this.searchInput){
@@ -91,22 +94,20 @@
 
 
             async GET_ITEMS(){
-                console.log('GET_ITEMS');
-                const formData = new FormData();
-                formData.append("action", 'doctors/get');
-                formData.append("cors_key", '8cbd6a0c2e767862b02887a446bb34ca');
-                formData.append("include_fields", JSON.stringify({'id':'value', 'fullname':'text'}));
-                formData.append("length", '1000');
+                let qdata = {
+                    action: this.typeTag + '/get',
+                    cors_key : '8cbd6a0c2e767862b02887a446bb34ca',
+                    include_fields : this.include_fields,
+                    length : 1000,
+                };
                 axios
-                    .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', formData)
+
+                    .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
                     .then(response => {
-                        this.info = response;
-
-
                         this.items = response.data.data;
-                        //console.log(this);
-                        //
-                    }).catch(error => console.log(error));
+
+                        //this.commit('doctorSettings/FILL_DOCTOR_SETTINGS_DATA', response.data);
+                    });
             },
         },
         created(){
@@ -119,7 +120,7 @@
 
             listItems:{
                 get(){
-                    console.log(this.items);
+                    //console.log(this.items);
                     return this.items;
                 },
                 // set(val){        console.log(val);

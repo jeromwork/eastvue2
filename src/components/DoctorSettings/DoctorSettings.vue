@@ -209,6 +209,14 @@
                         ></MultiTags>
 
 
+                        <MultiTags
+                                typeTag="specials"
+                                placeholder="Выберите специальности доктора"
+                                :include_fields="{id:'value', name:'text'}"
+                                @custom="SET_TAGS($event, 'specials')"
+                        ></MultiTags>
+
+
                         <v-combobox
                                 hide-selected
                                 multiple
