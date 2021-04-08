@@ -202,19 +202,23 @@
 
                         </v-row>
 
-                        <MultiTags
-                                typeTag="doctors"
-                                placeholder="Выберите докторов"
-                                @custom="SET_TAGS($event, 'doctors')"
-                        ></MultiTags>
-
 
                         <MultiTags
                                 typeTag="specials"
                                 placeholder="Выберите специальности доктора"
-                                :include_fields="{id:'value', name:'text'}"
-                                @custom="SET_TAGS($event, 'specials')"
+                                :include_fields="{iss_sp__id:'value', iss_sp__name:'text'}"
+                                @change-tags="SET_TAGS($event, 'IssSpecials')"
+                                :tagsSelected="tags"
                         ></MultiTags>
+                        <MultiTags
+                                typeTag="services"
+                                placeholder="Выберите услуги доктора"
+                                :include_fields="{isss__id:'value', isss__name:'text'}"
+                                @change-tags="SET_TAGS($event, 'IssServices')"
+
+                        ></MultiTags>
+
+
 
 
                         <v-combobox
@@ -315,9 +319,11 @@
 
         computed:{
             //====================================================================
-            ...mapGetters({getDoctors:'doctorSettings/getDoctors'
+            ...mapGetters({
+                getDoctors:'doctorSettings/getDoctors'
                 ,getChildAges:'doctorSettings/getArrChildAges'
                 //,currentDoctorId:'doctorSettings/currentDoctorId'
+                ,tagsSelected:'doctorSettings/tagsSelected'
             }),
 
             ...mapState({currentDoctorId:'doctorSettings/currentDoctorId'}),
@@ -349,6 +355,15 @@
                     //this.SET_CURRENT_DOCTOR_ID(val);
                     //this.$store.commit('doctorSettings/SET_CURRENT_DOCTOR_ID', val);
                     //this.$store.dispatch('doctorSettings/GET_DOCTOR_SETTINGS_AJAX');
+                },
+            },
+            tags:{
+                get(){
+                    console.log('type');
+                    return this.$store.getters["doctorSettings/tagsSelected"]('IssSpecials');
+                    //
+                    //return this.getChildAges();
+                    //return this.$store.getters["doctorSettings/tagsSelected"];
                 },
             },
             doctorSettings2:{

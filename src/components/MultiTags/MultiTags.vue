@@ -5,7 +5,7 @@
             multiple
             outlined
             small-chips
-            v-model="select"
+            v-model="tagsSelected"
             :items="listItems"
             :deletable-chips="true"
             :auto-select-first="true"
@@ -13,7 +13,7 @@
             :menu-props="{ offsetY: true, }"
             :hide-no-data="true"
             :label="this.placeholder"
-            v-on:change="$emit('custom', select)"
+            v-on:change="$emit('change-tags', select)"
     ></v-autocomplete>
 
 </template>
@@ -43,7 +43,9 @@
             include_fields:{
                 type: Object,
             },
-
+            tagsSelected: {
+                type: Array,
+            },
         },
 
         components: {
@@ -54,7 +56,7 @@
             items: [
                 {value:0, text:''},
             ],
-            select: [],
+            select:[],
             info:{},
             searchInput:null,
         }),
@@ -62,12 +64,6 @@
 
 
         methods: {
-            removeItem: function() {
-
-                // генерируем событие 'remove' и передаём id элемента
-                this.$emit('custom', 'somedata');
-                console.log('removeItem');
-            },
             async search(val){
                 console.log('search');
                 if(!val) {return;}
@@ -111,7 +107,7 @@
             },
         },
         created(){
-            // console.log('createdMultiTags');
+            console.log('createdMultiTags');
              this.GET_ITEMS();
 
         },
