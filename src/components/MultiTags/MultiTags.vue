@@ -1,11 +1,12 @@
 <template>
-
+<div>
     <v-autocomplete
             hide-selected
             multiple
             outlined
             small-chips
-            v-model="tagsSelected"
+            :value="tagsSelected"
+
             :items="listItems"
             :deletable-chips="true"
             :auto-select-first="true"
@@ -13,9 +14,9 @@
             :menu-props="{ offsetY: true, }"
             :hide-no-data="true"
             :label="this.placeholder"
-            v-on:change="$emit('change-tags', select)"
+            v-on:change="onChange"
     ></v-autocomplete>
-
+    </div>
 </template>
 
 
@@ -24,7 +25,7 @@
 
 <script>
     import axios from 'axios'
-//todo Сделать ajax подгрузку
+    //todo Сделать ajax подгрузку
     //сейчас все тэги загружаются при создании компонента.
     //если 800 штук плохо но терпимо
     //но если будут десятки тысяч, нужно переделывать на ajax
@@ -54,8 +55,7 @@
         data: () => ({
 
             items: [
-                {value:0, text:''},
-            ],
+                            ],
             select:[],
             info:{},
             searchInput:null,
@@ -100,15 +100,30 @@
 
                     .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
                     .then(response => {
-                        this.items = response.data.data;
+
+                        if(Array.isArray(response.data.data)){
+                            response.data.data.map((item) => {
+                                this.items.push({text:item.text, value:item.value*1});
+                            })
+
+
+                        }
+                        //this.items = response.data.data;
+
+
 
                         //this.commit('doctorSettings/FILL_DOCTOR_SETTINGS_DATA', response.data);
                     });
             },
+            onChange(value){
+                //console.log(value);
+                this.$emit('change-tags', value)
+            }
+
         },
         created(){
-            console.log('createdMultiTags');
-             this.GET_ITEMS();
+
+                         this.GET_ITEMS();
 
         },
 
@@ -123,6 +138,16 @@
                 //     this.items = val;
                 // },
             },
+            select2:{
+                get(){
+                    //console.log(this.tagsSelected);
+                    return this.tagsSelected;
+                },
+                set(){
+                    //console.log(this.tagsSelected);
+                    return this.select;
+                },
+            }
 
         }
 

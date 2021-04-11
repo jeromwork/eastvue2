@@ -41,7 +41,7 @@
                             ref="form"
                             v-model="valid"
                             lazy-validation
-
+                            :disabled="!doctorSettings.doc__name"
                     >
                         <v-row no-gutters >
                             <v-col cols="12"
@@ -182,7 +182,6 @@
                                         :items="listChildAges"
                                         label="С какого возраста работает с детьми"
                                         :disabled="!doctorSettings.doc__child"
-
                                         :outlined="true"
                                 ></v-select>
                             </v-col>
@@ -208,14 +207,14 @@
                                 placeholder="Выберите специальности доктора"
                                 :include_fields="{iss_sp__id:'value', iss_sp__name:'text'}"
                                 @change-tags="SET_TAGS($event, 'IssSpecials')"
-                                :tagsSelected="tags"
+                                :tagsSelected="tags('IssSpecials')"
                         ></MultiTags>
                         <MultiTags
                                 typeTag="services"
                                 placeholder="Выберите услуги доктора"
                                 :include_fields="{isss__id:'value', isss__name:'text'}"
                                 @change-tags="SET_TAGS($event, 'IssServices')"
-
+                                :tagsSelected="tags('IssServices')"
                         ></MultiTags>
 
 
@@ -302,14 +301,23 @@
                 this.$refs.form.reset()
             },
             SET_TAGS (e, name) {
-                console.log(e);
+                //console.log(e);
+               //console.log(name);
                 this.$store.commit('doctorSettings/SET_DOCTOR_TAGS', {name:name, data:e});
                // this.$refs.form.resetValidation()
             },
             onSaveDoctorData(){
                 //console.log(this.$refs.form);//забываем jquery. Здесь не нужно брать данные формы. Они храняться в data
                 this.$store.dispatch('doctorSettings/SAVE_DOCTOR_SETTINGS_AJAX');
-            }
+            },
+            tags(t){
+                //console.log(t);
+                return this.$store.getters["doctorSettings/tagsSelected"](t);
+                //
+                //return this.getChildAges();
+                //return this.$store.getters["doctorSettings/tagsSelected"];
+            },
+
         },
         created(){
             //console.log('created');
@@ -357,15 +365,7 @@
                     //this.$store.dispatch('doctorSettings/GET_DOCTOR_SETTINGS_AJAX');
                 },
             },
-            tags:{
-                get(){
-                    console.log('type');
-                    return this.$store.getters["doctorSettings/tagsSelected"]('IssSpecials');
-                    //
-                    //return this.getChildAges();
-                    //return this.$store.getters["doctorSettings/tagsSelected"];
-                },
-            },
+
             doctorSettings2:{
                 get(){        //console.log(this);
                     return this.$store.getters["doctorSettings/doctorSettings"];

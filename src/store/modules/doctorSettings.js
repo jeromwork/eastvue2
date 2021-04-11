@@ -123,7 +123,25 @@ console.log(state);
       {value:'-1', text:'Не работает с детьми'},
         {value:'0', text:'Новорожденный'},
       {value:'1', text:'с 1го месяца'},
-      {value:'2', text:'с 2х месяцев'},
+      {value:'2', text:'с 2 месяцев'},
+      {value:'3', text:'с 3 месяцев'},
+      {value:'4', text:'с 4 месяцев'},
+      {value:'5', text:'с 5 месяцев'},
+      {value:'6', text:'с 6 месяцев'},
+      {value:'7', text:'с 7 месяцев'},
+      {value:'8', text:'с 8 месяцев'},
+      {value:'9', text:'с 9 месяцев'},
+      {value:'10', text:'с 10 месяцев'},
+      {value:'11', text:'с 11 месяцев'},
+      {value:'12', text:'с детьми от года'},
+      {value:'13', text:'с детьми от полутора лет'},
+      {value:'14', text:'с детьми от 2 лет'},
+      {value:'15', text:'с детьми от 3 лет'},
+      {value:'16', text:'с детьми от 5 лет'},
+      {value:'17', text:'с детьми от 5 лет'},
+      {value:'18', text:'с детьми от 6 лет'},
+
+
     ],
   },
   getters: {
@@ -133,11 +151,11 @@ console.log(state);
     currentDoctorId: state => {        return state.currentDoctorId;      },
     doctorSettings: state => {        return state.doctorSettings ;      },
     tagsSelected: state => type =>  {
-      console.log(type);
+     // console.log(type);
 
-      if(state.doctorSettings['bind'] && state.doctorSettings['bind']['IssSpecials']){
-        console.log(state.doctorSettings['bind']['IssSpecials']);
-        return state.doctorSettings['bind']['IssSpecials'] ;
+      if(state.doctorSettings['bind'] && state.doctorSettings['bind'][type]){
+       // console.log('Обновляем tagsSelected');
+        return state.doctorSettings['bind'][type] ;
       }else{
         return[];
       }
