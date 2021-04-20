@@ -6,7 +6,7 @@
             outlined
             small-chips
             :value="tagsSelected"
-
+            v-model="tagsSelected"
             :items="listItems"
             :deletable-chips="true"
             :auto-select-first="true"
@@ -53,7 +53,7 @@
 
         },
         data: () => ({
-
+            iservices_connector_url:(window.location.host === 'http://localhost:8080/')? '/assets/components/eastclinic/iservices/connector.php': 'http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php',
             items: [
                             ],
             select:[],
@@ -77,7 +77,7 @@
 
                 formData.append("length", '1000');
                 axios
-                    .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', formData)
+                    .post(this.iservices_connector_url, formData)
                     .then(response => {
                         this.info = response;
 
@@ -90,6 +90,8 @@
 
 
             async GET_ITEMS(){
+
+                console.log(this)
                 let qdata = {
                     action: this.typeTag + '/get',
                     cors_key : '8cbd6a0c2e767862b02887a446bb34ca',
@@ -98,7 +100,7 @@
                 };
                 axios
 
-                    .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
+                    .post(this.iservices_connector_url, qdata)
                     .then(response => {
 
                         if(Array.isArray(response.data.data)){
