@@ -203,20 +203,31 @@
 
 
                         <MultiTags
-                                typeTag="specials"
+                                action="specials/get"
+                                :connector="'iservices'"
                                 placeholder="Выберите специальности доктора"
                                 :include_fields="{iss_sp__id:'value', iss_sp__name:'text'}"
                                 @change-tags="SET_TAGS($event, 'IssSpecials')"
                                 :tagsSelected="tags('IssSpecials')"
                         ></MultiTags>
                         <MultiTags
-                                typeTag="services"
+                                action="services/get"
+                                :connector="'iservices'"
                                 placeholder="Выберите услуги доктора"
                                 :include_fields="{isss__id:'value', isss__name:'text'}"
                                 @change-tags="SET_TAGS($event, 'IssServices')"
                                 :tagsSelected="tags('IssServices')"
                         ></MultiTags>
 
+                        <MultiTags
+                                action="tags/get"
+                                connector="eastdoc"
+                                tag="#progress"
+                                placeholder="Выберите статус доктора"
+                                :include_fields="{doc_tags__id:'value', doc_tags__name:'text'}"
+                                @change-tags="SET_TAGS($event, '#progress')"
+                                :tagsSelected="tags('#progress')"
+                        ></MultiTags>
 
 
 

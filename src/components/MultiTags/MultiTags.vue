@@ -34,12 +34,16 @@
         name: 'MultiTags',
 
         props: {
-            typeTag:{
+            action:{
                 type: String,
                 required: true,
             },
             placeholder:{
                 type: String,
+            },
+            connector:{
+                type: String,
+                required: true,
             },
             include_fields:{
                 type: Object,
@@ -47,15 +51,17 @@
             tagsSelected: {
                 type: Array,
             },
+            tag:{
+                type: String,
+            }
         },
 
         components: {
 
         },
         data: () => ({
-            iservices_connector_url:(window.location.host === 'http://localhost:8080/')? '/assets/components/eastclinic/iservices/connector.php': 'http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php',
-            items: [
-                            ],
+            // iservices_connector_url:,
+            items: [],
             select:[],
             info:{},
             searchInput:null,
@@ -64,11 +70,12 @@
 
 
         methods: {
+
             async search(val){
-                console.log('search');
+
                 if(!val) {return;}
                 const formData = new FormData();
-                formData.append("action", this.typeTag + '/get');
+                formData.append("action", this.action);
                 formData.append("cors_key", '8cbd6a0c2e767862b02887a446bb34ca');
                 formData.append("include_fields", JSON.stringify({'id':'value', 'fullname':'text'}));
                 if(this.searchInput){
@@ -77,7 +84,7 @@
 
                 formData.append("length", '1000');
                 axios
-                    .post(this.iservices_connector_url, formData)
+                    .post(this.urlConnector, formData)
                     .then(response => {
                         this.info = response;
 
@@ -91,16 +98,16 @@
 
             async GET_ITEMS(){
 
-                console.log(this)
                 let qdata = {
-                    action: this.typeTag + '/get',
+                    action: this.action,
                     cors_key : '8cbd6a0c2e767862b02887a446bb34ca',
+                    tag:this.tag,
                     include_fields : this.include_fields,
                     length : 1000,
                 };
                 axios
 
-                    .post(this.iservices_connector_url, qdata)
+                    .post(this.urlConnector, qdata)
                     .then(response => {
 
                         if(Array.isArray(response.data.data)){
@@ -140,16 +147,16 @@
                 //     this.items = val;
                 // },
             },
-            select2:{
+            urlConnector:{
                 get(){
-                    //console.log(this.tagsSelected);
-                    return this.tagsSelected;
-                },
-                set(){
-                    //console.log(this.tagsSelected);
-                    return this.select;
-                },
-            }
+                    console.log(this);
+
+                    return (window.location.host === 'http://localhost:8080/')? '/assets/components/eastclinic/'+this.connector+'/connector.php': 'http://dev.eastclinic.local/assets/components/eastclinic/'+this.connector+'/connector.php'
+                //return u;
+                }
+
+
+            },
 
         }
 

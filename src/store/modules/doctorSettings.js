@@ -51,8 +51,8 @@ export default {
         include_fields : {doc__id:'value', doc__fullname:'text'},
         length : 1000,
       };
-      console.log(qdata);
-      console.log(state);
+      // console.log(qdata);
+      // console.log(state);
       axios
           .post(state.iservices_connector_url, qdata)
           .then(response => {this.info = response
