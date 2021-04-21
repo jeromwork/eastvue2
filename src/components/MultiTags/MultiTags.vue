@@ -77,7 +77,7 @@
 
                 formData.append("length", '1000');
                 axios
-                    .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', formData)
+                    .post('http://dev-j.eastclinic.local/assets/components/eastclinic/iservices/connector.php', formData)
                     .then(response => {
                         this.info = response;
 
@@ -98,7 +98,7 @@
                 };
                 axios
 
-                    .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
+                    .post('http://dev-j.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
                     .then(response => {
 
                         if(Array.isArray(response.data.data)){

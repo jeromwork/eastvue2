@@ -51,7 +51,7 @@ export default {
       };
 
       axios
-          .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
+          .post('http://dev-j.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
           .then(response => {this.info = response
 
             console.log(response.data);
@@ -69,7 +69,7 @@ export default {
 
       axios
 
-          .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', formData)
+          .post('http://dev-j.eastclinic.local/assets/components/eastclinic/iservices/connector.php', formData)
           .then(response => {this.info = response
 
             console.log(response);
@@ -85,7 +85,7 @@ console.log(state);
         id:getters.currentDoctorId};
       axios
 
-          .post('http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
+          .post('http://dev-j.eastclinic.local/assets/components/eastclinic/iservices/connector.php', qdata)
           .then(response => {this.info = response
 
             //this.commit('doctorSettings/FILL_DOCTOR_SETTINGS_DATA', response.data);
