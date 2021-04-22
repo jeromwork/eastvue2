@@ -218,7 +218,6 @@
                                 @change-tags="SET_TAGS($event, 'IssServices')"
                                 :tagsSelected="tags('IssServices')"
                         ></MultiTags>
-
                         <MultiTags
                                 action="tags/get"
                                 connector="eastdoc"
@@ -228,20 +227,6 @@
                                 @change-tags="SET_TAGS($event, '#progress')"
                                 :tagsSelected="tags('#progress')"
                         ></MultiTags>
-
-
-
-                        <v-combobox
-                                hide-selected
-                                multiple
-                                outlined
-                                small-chips
-                                v-model="select"
-                                :items="items"
-                                :deletable-chips="true"
-
-                        ></v-combobox>
-
 
 
 

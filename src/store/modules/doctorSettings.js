@@ -17,13 +17,7 @@ export default {
       },
     SET_DOCTOR_TAGS(state, tags ={}) {
 
-      if(!state.doctorSettings.bind){
-        console.log('обновляем bind');
-        state.doctorSettings.bind = {};
-      }
-
-
-      state.doctorSettings.bind[tags.name] = tags.data ;
+      state.doctorSettings['bind'][tags.name] = tags.data ;
       console.log(state);
 
       },
@@ -75,12 +69,12 @@ export default {
           .post(state.iservices_connector_url, formData)
           .then(response => {this.info = response
 
-            console.log(response);
+            //console.log(response);
             this.commit('doctorSettings/FILL_DOCTOR_SETTINGS_DATA', response.data);
           });
     },
     async SAVE_DOCTOR_SETTINGS_AJAX({getters, state}){
-console.log(state);
+      console.log(state.doctorSettings);
       let qdata = {
         ...state.doctorSettings,
         action:'doctors/set',
@@ -113,12 +107,7 @@ console.log(state);
   },
   state: {
     iservices_connector_url:(window.location.host === 'http://localhost:8080/')? '/assets/components/eastclinic/iservices/connector.php': 'http://dev.eastclinic.local/assets/components/eastclinic/iservices/connector.php',
-    doctorSettings:
-      {id:0,
-        email: 0,
-        name: 0,
-        gender: 0}
-    ,
+    doctorSettings: {},
     doctors:[
       {id:0, name:'Выберите доктора'}
     ],
@@ -179,7 +168,7 @@ console.log(state);
     currentDoctorId: state => {        return state.currentDoctorId;      },
     doctorSettings: state => {        return state.doctorSettings ;      },
     tagsSelected: state => type =>  {
-     // console.log(type);
+     console.log(type);
 
       if(state.doctorSettings['bind'] && state.doctorSettings['bind'][type]){
        // console.log('Обновляем tagsSelected');

@@ -6,7 +6,7 @@
             outlined
             small-chips
             :value="tagsSelected"
-            v-model="tagsSelected"
+
             :items="listItems"
             :deletable-chips="true"
             :auto-select-first="true"
@@ -65,6 +65,7 @@
             select:[],
             info:{},
             searchInput:null,
+            selected:{}
         }),
 
 
@@ -94,8 +95,6 @@
                         //
                     }).catch(error => console.log(error));
             },
-
-
             async GET_ITEMS(){
 
                 let qdata = {
@@ -125,9 +124,14 @@
                     });
             },
             onChange(value){
-                //console.log(value);
+                console.log(value);
                 this.$emit('change-tags', value)
             }
+
+        },
+        updated() {
+            this.selected = this.tagsSelected;
+            console.log(this.tagsSelected);
 
         },
         created(){
@@ -149,8 +153,6 @@
             },
             urlConnector:{
                 get(){
-                    console.log(this);
-
                     return (window.location.host === 'http://localhost:8080/')? '/assets/components/eastclinic/'+this.connector+'/connector.php': 'http://dev.eastclinic.local/assets/components/eastclinic/'+this.connector+'/connector.php'
                 //return u;
                 }
