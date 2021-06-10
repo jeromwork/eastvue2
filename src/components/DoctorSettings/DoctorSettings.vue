@@ -264,7 +264,6 @@
         },
         components: {
             MultiTags
-
         },
         data: () => ({
             valid2: true,
